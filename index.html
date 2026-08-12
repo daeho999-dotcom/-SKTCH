@@ -3,363 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 사회적 가치 페스타 - 스케치포굿 최종 선정 검토안</title>
+    <title>사회적 가치 페스타 스타트업 선정</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f4f6f9;
-            color: #333;
+            background-color: #f8f9fa;
+            color: #2c3e50;
             margin: 0;
             padding: 40px 20px;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
         .header {
             text-align: center;
             margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #34495e;
         }
         .header h1 {
             font-size: 2.2rem;
             color: #111;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         .header p {
-            color: #666;
-            font-size: 1.1rem;
+            color: #e67e22;
+            font-size: 1.2rem;
+            font-weight: 700;
         }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-        }
+        
+        /* 1개사 한 줄(가로) 레이아웃 */
         .card {
+            display: grid;
+            grid-template-columns: 50px 200px 1fr 350px;
+            align-items: center;
+            gap: 20px;
             background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            padding: 25px;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin-bottom: 12px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: transform 0.2s;
         }
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-        
-        /* User Requested Styles */
-        .card.recommend {
-            background-color: rgba(255, 0, 0, 0.5);
-            border: 2px solid red;
-            color: #ffffff;
-        }
-        .card.circle {
-            background-color: rgba(0, 0, 255, 0.7);
-            color: #ffffff;
-        }
-        .card.triangle {
-            border-left: 6px solid #f39c12;
-        }
-        .card.cross {
-            border-left: 6px solid #e74c3c;
-            opacity: 0.85;
-        }
-        .card.session {
-            border-left: 6px solid #8e44ad;
+            transform: scale(1.005);
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            padding-bottom: 15px;
+        /* 상태별 지정 스타일 */
+        .card.recommend {
+            border: 3px solid #e74c3c; /* 빨간색 굵은 테두리 */
         }
-        .card.recommend .card-header, .card.circle .card-header {
-            border-bottom: 1px solid rgba(255,255,255,0.3);
+        .card.circle {
+            border: 2px dashed #3498db; /* 파란색 점선 테두리 */
         }
-        
-        .title-group {
+        .card.triangle {
+            /* 세모는 일반으로 놔둠 (기본 테두리) */
+        }
+        .card.cross {
+            background-color: #f2f4f6; /* 옅은 회색 바탕 */
+            color: #7f8c8d;
+        }
+
+        /* 아이콘 영역 */
+        .status-icon {
+            font-size: 1.8rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        .card.recommend .status-icon { color: #e74c3c; } /* ★ */
+        .card.circle .status-icon { color: #3498db; }    /* ○ */
+        .card.triangle .status-icon { color: #f39c12; }  /* △ */
+        .card.cross .status-icon { color: #95a5a6; }     /* ✕ */
+        .card.session .status-icon { color: #8e44ad; }   /* 📌 */
+
+        /* 기업 정보 영역 */
+        .info-group {
             display: flex;
             flex-direction: column;
         }
         .category {
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            opacity: 0.7;
-        }
-        .startup-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin: 0;
-        }
-
-        /* Badges */
-        .badge {
-            padding: 6px 12px;
-            border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 700;
-            white-space: nowrap;
+            color: #7f8c8d;
+            margin-bottom: 4px;
         }
-        .badge.recommend { background: #ffffff; color: red; }
-        .badge.circle { background: #ffffff; color: blue; }
-        .badge.triangle { background: #f39c12; color: #ffffff; }
-        .badge.cross { background: #e74c3c; color: #ffffff; }
-        .badge.session { background: #8e44ad; color: #ffffff; }
+        .startup-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0;
+            color: inherit;
+        }
 
+        /* 아이템 설명 영역 */
         .description {
-            font-size: 0.95rem;
+            font-size: 1rem;
             line-height: 1.5;
-            margin-bottom: 20px;
-            flex-grow: 1;
+            padding-right: 20px;
         }
 
+        /* 의견 영역 */
         .opinion-box {
             background: rgba(0,0,0,0.04);
-            padding: 15px;
-            border-radius: 8px;
-            font-weight: 500;
+            padding: 12px 15px;
+            border-radius: 6px;
             font-size: 0.95rem;
+            font-weight: 500;
+            border-left: 4px solid #bdc3c7;
         }
-        .card.recommend .opinion-box, .card.circle .opinion-box {
-            background: rgba(255,255,255,0.2);
-            color: #ffffff;
-        }
-        .card.triangle .opinion-box { color: #d35400; }
-        .card.cross .opinion-box { color: #c0392b; }
-        .card.session .opinion-box { color: #8e44ad; }
+        .card.recommend .opinion-box { border-left-color: #e74c3c; background: #fdf2f1; color: #c0392b; }
+        .card.circle .opinion-box { border-left-color: #3498db; background: #f0f8ff; color: #2980b9; }
+        .card.triangle .opinion-box { border-left-color: #f39c12; }
+        .card.cross .opinion-box { border-left-color: #95a5a6; background: #e8eaed; }
+        .card.session .opinion-box { border-left-color: #8e44ad; background: #f9f0ff; color: #8e44ad;}
+        
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <h1>2026 사회적 가치 페스타 - 스케치포굿 참여 스타트업 </h1>
-        <p>전체 13개사 개요 및 실무진 최종 선정 의견 (Zero-Base 검토)</p>
+        <h1>사회적 가치 페스타 스타트업 선정</h1>
+        <p>2개의 실무 추천 기업과 3개의 옵션 중 총 3개사 선정예정</p>
     </div>
 
-    <div class="grid-container">
-
-        <!-- 추천 (Recommend) -->
-        <div class="card recommend">
-            <div class="card-header">
-                <div class="title-group">
-                    <span class="category">디지털 포용·돌봄</span>
-                    <h3 class="startup-name">슬립웨이브</h3>
-                </div>
-                <span class="badge recommend">추천</span>
-            </div>
-            <div class="description">
-                셀룰러 IoT 침대 센싱패드로 독거노인 수면 중 생체신호를 모니터링하는 예방형 돌봄
-            </div>
-            <div class="opinion-box">
-                💡 <strong>선정 의견:</strong> 전시 적합
-            </div>
+    <!-- 추천 (★) -->
+    <div class="card recommend">
+        <div class="status-icon">★</div>
+        <div class="info-group">
+            <span class="category">디지털 포용·돌봄</span>
+            <h3 class="startup-name">슬립웨이브</h3>
         </div>
-
-        <div class="card recommend">
-            <div class="card-header">
-                <div class="title-group">
-                    <span class="category">디지털 포용·돌봄</span>
-                    <h3 class="startup-name">아이클로</h3>
-                </div>
-                <span class="badge recommend">추천</span>
-            </div>
-            <div class="description">
-                검진 → 진료 → 사후관리를 비대면으로 연결하는 디지털 구강돌봄 — HomeDen
-            </div>
-            <div class="opinion-box">
-                💡 <strong>선정 의견:</strong> 전시 적합
-            </div>
-        </div>
-
-        <!-- 동그라미 (Circle) -->
-        <div class="card circle">
-            <div class="card-header">
-                <div class="title-group">
-                    <span class="category">디지털 포용·돌봄</span>
-                    <h3 class="startup-name">윙스</h3>
-                </div>
-                <span class="badge circle">동그라미</span>
-            </div>
-            <div class="description">
-                AI 음성청진기로 아동 언어발달을 조기 진단하고 훈련까지 잇는 통합 솔루션
-            </div>
-            <div class="opinion-box">
-                💡 <strong>선정 의견:</strong> 시연 어떻게 할지 확인 필요
-            </div>
-        </div>
-
-        <div class="card circle">
-            <div class="card-header">
-                <div class="title-group">
-                    <span class="category">디지털 포용·돌봄</span>
-                    <h3 class="startup-name">헬로프렌즈</h3>
-                </div>
-                <span class="badge circle">동그라미</span>
-            </div>
-            <div class="description">
-                한국 입국·체류 외국인을 위한 다국어 AI 행정·비자 지원 플랫폼
-            </div>
-            <div class="opinion-box">
-                💡 <strong>선정 의견:</strong> 26개국 설명 키오스크 설치 가능여부 파악, 사회적 가치 약함
-            </div>
-        </div>
-
-        <div class="card circle">
-            <div class="card-header">
-                <div class="title-group">
-                    <span class="category">기후재난 대응</span>
-                    <h3 class="startup-name">코어모션</h3>
-                </div>
-                <span class="badge circle">동그라미</span>
-            </div>
-            <div class="description">
-                산불의 출발점 '지표화'를 발화 즉시 감지하는 무전력·자체 통신망 IoT
-            </div>
-            <div class="opinion-box">
-                💡 <strong>선정 의견:</strong> 컨셉 등은 좋으나, 시연제품을 전시때까지 준비할 수 있을 지 미지수
-            </div>
-        </div>
-
-        <!-- 세모 (Triangle) -->
-        <div class="card triangle">
-            <div class="card-header">
-                <div class="title-group">
-                    <span class="category">디지털 포용·돌봄</span>
-                    <h3 class="startup-name">닥터프레소</h3>
-                </div>
-                <span class="badge triangle">세모</span>
-            </div>
-            <div class="description">
-                Ambient AI로 진료 기록을 자동화하고 정밀 진단을 돕는 정신건강 의료 솔루션 — SOAPY
-            </div>
-            <div class="opinion-box">
-                ⚠️ <strong>선정 의견:</strong> App 기반 & 설명 난해
-            </div>
-        </div>
-
-        <div class="card triangle">
-            <div class="card-header">
-                <div class="title-group">
-                    <span class="category">디지털 포용·돌봄</span>
-                    <h3 class="startup-name">솔리다리테</h3>
-                </div>
-                <span class="badge triangle">세모</span>
-            </div>
-            <div class="description">
-                외국인 유학생·편입생 등이 검증된 정보·관계망 안에서 대학 적응을 시작하도록 — 노크(Knock)
-            </div>
-            <div class="opinion-box">
-                ⚠️ <strong>선정 의견:</strong> App 기반 & 사회적 가치???
-            </div>
-        </div>
-
-        <!-- 엑스 (Cross) -->
-        <div class="card cross">
-            <div class="card-header">
-                <div class="title-group">
-                    <span class="category">디지털 포용·돌봄</span>
-                    <h3 class="startup-name">시놀</h3>
-                </div>
-                <span class="badge cross">엑스</span>
-            </div>
-            <div class="description">
-                AI 기반 온·오프라인 모임으로 시니어의 고립·우울을 줄이고 관계를 잇는 플랫폼
-            </div>
-            <div class="opinion-box">
-                ❌ <strong>선정 의견:</strong> 다소 부정적 이미지 있음
-            </div>
-        </div>
-
-        <div class="card cross">
-            <div class="card-header">
-                <div class="title-group">
-                    <span class="category">디지털 포용·돌봄</span>
-                    <h3 class="startup-name">쓰리알이노베이션</h3>
-                </div>
-                <span class="badge cross">엑스</span>
-            </div>
-            <div class="description">
-                다문화 취약가정 부모를 위한 AI 자녀 공감 편지 — Moment Family Bridge
-            </div>
-            <div class="opinion-box">
-                ❌ <strong>선정 의견:</strong> 컨트롤 어려움
-            </div>
-        </div>
-
-        <div class="card cross">
-            <div class="card-header">
-                <div class="title-group">
-                    <span class="category">기후재난 대응</span>
-                    <h3 class="startup-name">우짜</h3>
-                </div>
-                <span class="badge cross">엑스</span>
-            </div>
-            <div class="description">
-                초고해상도 강우 데이터와 AI로 재해약자 대피를 돕는 침수예측 플랫폼
-            </div>
-            <div class="opinion-box">
-                ❌ <strong>선정 의견:</strong> 대표의 전달력 부족
-            </div>
-        </div>
-
-        <!-- 세션 참가 전환 (Session) -->
-        <div class="card session">
-            <div class="card-header">
-                <div class="title-group">
-                    <span class="category">디지털 포용·돌봄</span>
-                    <h3 class="startup-name">불타는고구마</h3>
-                </div>
-                <span class="badge session">세션 참가</span>
-            </div>
-            <div class="description">
-                AI로 돌봄 수요자와 근거리 인력을 실시간 연결하는 초단기 돌봄 매칭
-            </div>
-            <div class="opinion-box">
-                📌 <strong>선정 의견:</strong> 엑스표시, SKTCH FOR GOOD 세션 참가로 전환
-            </div>
-        </div>
-
-        <div class="card session">
-            <div class="card-header">
-                <div class="title-group">
-                    <span class="category">기후재난 대응</span>
-                    <h3 class="startup-name">티에이비</h3>
-                </div>
-                <span class="badge session">세션 참가</span>
-            </div>
-            <div class="description">
-                감염성 질병 예방을 위한 마개형 UV 살균기 (라디스)
-            </div>
-            <div class="opinion-box">
-                📌 <strong>선정 의견:</strong> 엑스표시, SKTCH FOR GOOD 세션 참가로 전환
-            </div>
-        </div>
-
-        <div class="card session">
-            <div class="card-header">
-                <div class="title-group">
-                    <span class="category">디지털범죄 예방</span>
-                    <h3 class="startup-name">메타크라우드</h3>
-                </div>
-                <span class="badge session">세션 참가</span>
-            </div>
-            <div class="description">
-                시니어 디지털 범죄를 예방하는 통합 돌봄 인프라 — VoiceShield
-            </div>
-            <div class="opinion-box">
-                📌 <strong>선정 의견:</strong> SKTCH FOR GOOD 세션 참가로 수정
-            </div>
-        </div>
-
+        <div class="description">셀룰러 IoT 침대 센싱패드로 독거노인 수면 중 생체신호를 모니터링하는 예방형 돌봄</div>
+        <div class="opinion-box">전시 적합</div>
     </div>
+
+    <div class="card recommend">
+        <div class="status-icon">★</div>
+        <div class="info-group">
+            <span class="category">디지털 포용·돌봄</span>
+            <h3 class="startup-name">아이클로</h3>
+        </div>
+        <div class="description">검진 → 진료 → 사후관리를 비대면으로 연결하는 디지털 구강돌봄 — HomeDen</div>
+        <div class="opinion-box">전시 적합</div>
+    </div>
+
+    <!-- 동그라미 (○) -->
+    <div class="card circle">
+        <div class="status-icon">○</div>
+        <div class="info-group">
+            <span class="category">디지털 포용·돌봄</span>
+            <h3 class="startup-name">윙스</h3>
+        </div>
+        <div class="description">AI 음성청진기로 아동 언어발달을 조기 진단하고 훈련까지 잇는 통합 솔루션</div>
+        <div class="opinion-box">시연 어떻게 할지 확인 필요</div>
+    </div>
+
+    <div class="card circle">
+        <div class="status-icon">○</div>
+        <div class="info-group">
+            <span class="category">디지털 포용·돌봄</span>
+            <h3 class="startup-name">헬로프렌즈</h3>
+        </div>
+        <div class="description">한국 입국·체류 외국인을 위한 다국어 AI 행정·비자 지원 플랫폼</div>
+        <div class="opinion-box">26개국 설명 키오스크 설치 가능여부 파악, 사회적 가치 약함</div>
+    </div>
+
+    <div class="card circle">
+        <div class="status-icon">○</div>
+        <div class="info-group">
+            <span class="category">기후재난 대응</span>
+            <h3 class="startup-name">코어모션</h3>
+        </div>
+        <div class="description">산불의 출발점 '지표화'를 발화 즉시 감지하는 무전력·자체 통신망 IoT</div>
+        <div class="opinion-box">컨셉 등은 좋으나, 시연제품을 전시때까지 준비할 수 있을 지 미지수</div>
+    </div>
+
+    <!-- 세모 (△) -->
+    <div class="card triangle">
+        <div class="status-icon">△</div>
+        <div class="info-group">
+            <span class="category">디지털 포용·돌봄</span>
+            <h3 class="startup-name">닥터프레소</h3>
+        </div>
+        <div class="description">Ambient AI로 진료 기록을 자동화하고 정밀 진단을 돕는 정신건강 의료 솔루션 — SOAPY</div>
+        <div class="opinion-box">App 기반 & 설명 난해</div>
+    </div>
+
+    <div class="card triangle">
+        <div class="status-icon">△</div>
+        <div class="info-group">
+            <span class="category">디지털 포용·돌봄</span>
+            <h3 class="startup-name">솔리다리테</h3>
+        </div>
+        <div class="description">외국인 유학생·편입생 등이 검증된 정보·관계망 안에서 대학 적응을 시작하도록 — 노크(Knock)</div>
+        <div class="opinion-box">App 기반 & 사회적 가치???</div>
+    </div>
+
+    <!-- 엑스 (✕) 및 세션 참가 -->
+    <div class="card cross">
+        <div class="status-icon">✕</div>
+        <div class="info-group">
+            <span class="category">디지털 포용·돌봄</span>
+            <h3 class="startup-name">불타는고구마</h3>
+        </div>
+        <div class="description">AI로 돌봄 수요자와 근거리 인력을 실시간 연결하는 초단기 돌봄 매칭</div>
+        <div class="opinion-box">SKTCH FOR GOOD 세션 참가</div>
+    </div>
+
+    <div class="card cross">
+        <div class="status-icon">✕</div>
+        <div class="info-group">
+            <span class="category">기후재난 대응</span>
+            <h3 class="startup-name">티에이비</h3>
+        </div>
+        <div class="description">감염성 질병 예방을 위한 마개형 UV 살균기 (라디스)</div>
+        <div class="opinion-box">SKTCH FOR GOOD 세션 참가</div>
+    </div>
+
+    <div class="card cross">
+        <div class="status-icon">✕</div>
+        <div class="info-group">
+            <span class="category">디지털 포용·돌봄</span>
+            <h3 class="startup-name">시놀</h3>
+        </div>
+        <div class="description">AI 기반 온·오프라인 모임으로 시니어의 고립·우울을 줄이고 관계를 잇는 플랫폼</div>
+        <div class="opinion-box">다소 부정적 이미지 있음</div>
+    </div>
+
+    <div class="card cross">
+        <div class="status-icon">✕</div>
+        <div class="info-group">
+            <span class="category">디지털 포용·돌봄</span>
+            <h3 class="startup-name">쓰리알이노베이션</h3>
+        </div>
+        <div class="description">다문화 취약가정 부모를 위한 AI 자녀 공감 편지 — Moment Family Bridge</div>
+        <div class="opinion-box">컨트롤 어려움</div>
+    </div>
+
+    <div class="card cross">
+        <div class="status-icon">✕</div>
+        <div class="info-group">
+            <span class="category">기후재난 대응</span>
+            <h3 class="startup-name">우짜</h3>
+        </div>
+        <div class="description">초고해상도 강우 데이터와 AI로 재해약자 대피를 돕는 침수예측 플랫폼</div>
+        <div class="opinion-box">대표의 전달력 부족</div>
+    </div>
+
+    <!-- 메타크라우드 (단순 세션 참가) -->
+    <div class="card session">
+        <div class="status-icon">📌</div>
+        <div class="info-group">
+            <span class="category">디지털범죄 예방</span>
+            <h3 class="startup-name">메타크라우드</h3>
+        </div>
+        <div class="description">시니어 디지털 범죄를 예방하는 통합 돌봄 인프라 — VoiceShield</div>
+        <div class="opinion-box">SKTCH FOR GOOD 세션 참가</div>
+    </div>
+
 </div>
 
 </body>
